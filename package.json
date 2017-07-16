@@ -1,8 +1,8 @@
 {
   "name": "liri-node-app",
   "version": "1.0.0",
-  "description": "This is my cool app",
-  "main": "index.js",
+  "description": "language based Siri app",
+  "main": "keys.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,15 +10,15 @@
     "type": "git",
     "url": "git+https://github.com/menelik7/liri-node-app.git"
   },
-  "keywords": [
-    "tweet",
-    "song",
-    "movie"
-  ],
   "author": "Menelik Tefera",
-  "license": "UNLICENSED",
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/menelik7/liri-node-app/issues"
   },
-  "homepage": "https://github.com/menelik7/liri-node-app#readme"
+  "homepage": "https://github.com/menelik7/liri-node-app#readme",
+  "dependencies": {
+    "node-spotify-api": "^1.0.5",
+    "request": "^2.81.0",
+    "twitter": "^1.7.1"
+  }
 }
