@@ -22,15 +22,6 @@ switch (userInput) {
   case "do-what-it-says":
     doWhatItSays();
     break;
-
-  default: 
-    // console.log("\r\n" +"Try typing one of the following commands after 'node liri.js' : " +"\r\n"+
-    //   "1. my-tweets 'any twitter name' " +"\r\n"+
-    //   "2. spotify-this-song 'any song name' "+"\r\n"+
-    //   "3. movie-this 'any movie name' "+"\r\n"+
-    //   "4. do-what-it-says."+"\r\n"+
-    //   "Be sure to put the movie or song name in quotation marks if it's more than one word.");
-    break;
 }
 
 //**********************************************************TWITTER*************************************************************//
@@ -135,14 +126,5 @@ function doWhatItSays() {
     }
   });
 };
-
-
-function log(logResults) {
-  fs.appendFile("log.txt", logResults, (error) => {
-    if(error) {
-      throw error;
-    }
-  });
-}
 
 
