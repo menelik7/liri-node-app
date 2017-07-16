@@ -146,3 +146,73 @@ Preview Url: https://p.scdn.co/mp3-preview/e72a05dc3f69c891e3390c3ceaa77fad02f6b
 Album the song is from: The Hits--Chapter One
 -----------------------------------------------------------------------------------------------------------------------
 
+-----------------------------------------------------------------------------------------------------------------------
+Artist: Zedd
+Song: Stay (with Alessia Cara)
+Preview Url: null
+Album the song is from: Stay
+-----------------------------------------------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------------------------------------------
+Artist: Destiny's Child
+Song: Bootylicious
+Preview Url: https://p.scdn.co/mp3-preview/744f405691f6a13bc60ebce53b10c0cf68d8ded2?cid=151caf1f74f84ba29456159b10ee3975
+Album the song is from: Survivor
+-----------------------------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Title: Jaws
+Year: 1975
+Imdb Rating: 8.0
+Rotten Tomatoes Rating: N/A
+Country: USA
+Language: English
+Plot: A giant great white shark arrives on the shores of a New England beach resort and wreaks havoc with bloody attacks on swimmers, until a local sheriff teams up with a marine biologist and an old seafarer to hunt the monster down.
+Actors: Roy Scheider, Robert Shaw, Richard Dreyfuss, Lorraine Gary
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Title: Jaws
+Year: 1975
+Imdb Rating: 8.0
+Rotten Tomatoes Rating: N/A
+Country: USA
+Language: English
+Plot: A giant great white shark arrives on the shores of a New England beach resort and wreaks havoc with bloody attacks on swimmers, until a local sheriff teams up with a marine biologist and an old seafarer to hunt the monster down.
+Actors: Roy Scheider, Robert Shaw, Richard Dreyfuss, Lorraine Gary
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------------------------------------------
+Artist: Ace of Base
+Song: The Sign
+Preview Url: https://p.scdn.co/mp3-preview/4c463359f67dd3546db7294d236dd0ae991882ff?cid=151caf1f74f84ba29456159b10ee3975
+Album the song is from: The Sign (US Album) [Remastered]
+-----------------------------------------------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------------------------------------------
+Artist: Harry Styles
+Song: Sign of the Times
+Preview Url: https://p.scdn.co/mp3-preview/9801b9239ad1b833f1317574ee55b9d7b8426ff1?cid=151caf1f74f84ba29456159b10ee3975
+Album the song is from: Sign of the Times
+-----------------------------------------------------------------------------------------------------------------------
+
+
+-----------------------------------------------------------------------------------------------------------------------
+Artist: Backstreet Boys
+Song: I Want It That Way
+Preview Url: https://p.scdn.co/mp3-preview/e72a05dc3f69c891e3390c3ceaa77fad02f6b5f6?cid=151caf1f74f84ba29456159b10ee3975
+Album the song is from: The Hits--Chapter One
+-----------------------------------------------------------------------------------------------------------------------
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Title: Jaws
+Year: 1975
+Imdb Rating: 8.0
+Rotten Tomatoes Rating: N/A
+Country: USA
+Language: English
+Plot: A giant great white shark arrives on the shores of a New England beach resort and wreaks havoc with bloody attacks on swimmers, until a local sheriff teams up with a marine biologist and an old seafarer to hunt the monster down.
+Actors: Roy Scheider, Robert Shaw, Richard Dreyfuss, Lorraine Gary
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+

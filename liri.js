@@ -71,8 +71,8 @@ function spotifyThisSong() {
   if(!searchParameter){
     searchParameter = "The Sign, Ace of Base";
   }
-  params = searchParameter;
-  spotify.search({ type: "track", query: params }, function(err, data) {
+  // params = searchParameter;
+  spotify.search({ type: "track", query: searchParameter }, function(err, data) {
     if(!err){
       var songInfo = data.tracks.items;
           results =
@@ -96,8 +96,8 @@ function movieThis(){
   if(!searchParameter){
     searchParameter = "Mr. Nobody";
   }
-  params = searchParameter;
-  request("http://www.omdbapi.com/?&tomatoes=true&r=json&apikey="+ omdbKeysList.API_key + "&t=" + params, function (error, response, body) {
+  // params = searchParameter;
+  request("http://www.omdbapi.com/?&tomatoes=true&r=json&apikey="+ omdbKeysList.API_key + "&t=" + searchParameter, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       var movieObject = JSON.parse(body);
       // console.log(movieObject);
@@ -127,6 +127,7 @@ function doWhatItSays() {
   fs.readFile("random.txt", "utf8", function(error, data){
     if (!error) {
       var output = data.split(",");
+      console.log(output);
       searchParameter = output[1];
       spotifyThisSong();
       writeToFile();
