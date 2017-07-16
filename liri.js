@@ -1,9 +1,27 @@
 //reads and writes files
 var fs = require("fs"); 
 // Grabs the keys file and store it in a variable
-var liri = require("./keys.js");
+var keys = require("./keys.js");
+var Twitter = require('twitter');
+var Spotify = require('node-spotify-api');
+var request = require('request');
+
+//Grab the keys and requirements for Spotify
+var spotifyKeysList = keys.spotifyKeys;
+var spotify = new Spotify(spotifyKeysList);
+//Grab the API key and requirements for OMDB
+var omdbKeysList = keys.omdbKeys;
+//Grab the twitter Keys
+var twitterKeyList = keys.twitterKeys;
+var client = new Twitter(twitterKeyList);
+
 //Store the operand
 var userInput = process.argv[2];
+//Grab the user input to establish the specific search parameter for Spotify or OMDB (4th argument in terminal window)
+var searchParameter = process.argv[3];
+
+//Create an empty array to push search results into
+var results = [];
 
 // This switch-case will determine which function gets run.
 switch (userInput) {
@@ -27,23 +45,19 @@ switch (userInput) {
 //**********************************************************TWITTER*************************************************************//
 //Function to display frist 20 tweets
 function myTweets(){
-  //Grab the twitter Keys
-  var twitterKeyList = liri.twitterKeys;
-  var Twitter = require('twitter');
-  var client = new Twitter(twitterKeyList);
   var params = {screen_name: 'MenelikFalc'};
   client.get('statuses/user_timeline', params, function(error, tweets, response) {
     if (!error) {
-      var data = []; //empty array to hold data
       for (var i = 0; i < tweets.length; i++) {
-        data.push({
-          'tweet #: ' : i+1,
-          'created at: ' : tweets[i].created_at,
-          'Tweets: ' : tweets[i].text,
-          '------------------------------------------------------------------------------------------------------------------':''
-        });
+        results[i] = 
+          "tweet #: " + (i+1) + "\r\n" +
+          "created at: " + tweets[i].created_at + "\r\n" +
+          "Tweets: " + tweets[i].text + "\r\n" +
+          "------------------------------------------------------------------------------------------------------------------" + "\r\n";
       }
-      console.log(data);
+      // console.log("\r\n");
+      console.log(results);
+      writeToFile();
     }
     else {
       console.log(error);
@@ -54,27 +68,22 @@ function myTweets(){
 
 //**********************************************************SPOTIFY************************************************************//
 function spotifyThisSong() {
-  //Grab the spotify keys
-  var spotifyKeysList = liri.spotifyKeys;
-
-  var Spotify = require('node-spotify-api');
-  var songName = process.argv[3];
-  var spotify = new Spotify(spotifyKeysList);
-  if(!songName){
-    songName = "The Sign, Ace of Base";
+  if(!searchParameter){
+    searchParameter = "The Sign, Ace of Base";
   }
-  params = songName;
+  params = searchParameter;
   spotify.search({ type: "track", query: params }, function(err, data) {
     if(!err){
       var songInfo = data.tracks.items;
-          var spotifyResults =
+          results =
           "-----------------------------------------------------------------------------------------------------------------------" + "\r\n" +
           "Artist: " + songInfo[0].artists[0].name + "\r\n" +
           "Song: " + songInfo[0].name + "\r\n" +
           "Preview Url: " + songInfo[0].preview_url + "\r\n" +
           "Album the song is from: " + songInfo[0].album.name + "\r\n" +
-          "-----------------------------------------------------------------------------------------------------------------------"
-          console.log(spotifyResults);
+          "-----------------------------------------------------------------------------------------------------------------------" + "\r\n";
+          console.log(results);
+          writeToFile();
     } else {
       return console.log("Error :"+ err);
     }
@@ -84,18 +93,15 @@ function spotifyThisSong() {
 
 //************************************************************OMDB**************************************************************//
 function movieThis(){
-  //Grab the OMDB API key
-  var omdbKeysList = liri.omdbKeys;
-  var request = require('request');
-  var movie = process.argv[3];
-  if(!movie){
-    movie = "Mr. Nobody";
+  if(!searchParameter){
+    searchParameter = "Mr. Nobody";
   }
-  params = movie
-  request("http://www.omdbapi.com/?apikey=40e9cece&t=" + params, function (error, response, body) {
+  params = searchParameter;
+  request("http://www.omdbapi.com/?&tomatoes=true&r=json&apikey="+ omdbKeysList.API_key + "&t=" + params, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       var movieObject = JSON.parse(body);
-      var movieResults =
+      // console.log(movieObject);
+      results =
       "----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------" + "\r\n" +
       "Title: " + movieObject.Title + "\r\n" +
       "Year: " + movieObject.Year + "\r\n" +
@@ -106,7 +112,8 @@ function movieThis(){
       "Plot: " + movieObject.Plot + "\r\n" +
       "Actors: " + movieObject.Actors + "\r\n" +
       "-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------" + "\r\n";
-      console.log(movieResults);
+      console.log(results);
+      writeToFile();
     } else {
       return console.log("Error :"+ error);
     }
@@ -120,11 +127,25 @@ function doWhatItSays() {
   fs.readFile("random.txt", "utf8", function(error, data){
     if (!error) {
       var output = data.split(",");
-      spotifyThisSong(output[1]);
+      searchParameter = output[1];
+      spotifyThisSong();
+      writeToFile();
     } else {
       console.log("Error occurred" + error);
     }
   });
 };
+
+
+//***********************************************WRITE RESULTS TO log.txt******************************************************//
+// This function grabs the "results" value from each search performed, and writes it to our log.txt file 
+function writeToFile() {
+  fs.appendFile("log.txt", results + "\r\n", function(err) {
+    if (err) {
+      return console.log(err);
+    }
+  });
+}
+
 
 
