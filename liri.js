@@ -43,20 +43,22 @@ switch (userInput) {
 }
 
 //**********************************************************TWITTER*************************************************************//
-//Function to display frist 20 tweets
+//Function to display first 20 tweets
 function myTweets(){
   var params = {screen_name: 'MenelikFalc'};
   client.get('statuses/user_timeline', params, function(error, tweets, response) {
     if (!error) {
+      // console.log(tweets);
       for (var i = 0; i < tweets.length; i++) {
-        results[i] = 
-          "tweet #: " + (i+1) + "\r\n" +
-          "created at: " + tweets[i].created_at + "\r\n" +
-          "Tweets: " + tweets[i].text + "\r\n" +
-          "------------------------------------------------------------------------------------------------------------------" + "\r\n";
+        console.log(
+          results[i] = 
+            "------------------------------------------------" + "\r\n" +
+            "tweet #: " + (i+1) + "\r\n" +
+            "created by: " + tweets[i].user.name + "\r\n" +
+            "created at: " + tweets[i].created_at + "\r\n" +
+            "Tweets: " + tweets[i].text + "\r\n" +
+            "------------------------------------------------" + "\r\n");
       }
-      // console.log("\r\n");
-      console.log(results);
       writeToFile();
     }
     else {
@@ -67,6 +69,7 @@ function myTweets(){
 
 
 //**********************************************************SPOTIFY************************************************************//
+//Function to search for a particular song and display certain properties of that song, or choose "The sign by Ace of Base" if no search parameters have been entered.
 function spotifyThisSong() {
   if(!searchParameter){
     searchParameter = "The Sign, Ace of Base";
@@ -76,12 +79,12 @@ function spotifyThisSong() {
     if(!err){
       var songInfo = data.tracks.items;
           results =
-          "-----------------------------------------------------------------------------------------------------------------------" + "\r\n" +
+          "-------------------------------------------------------------------------------------------------------------------------" + "\r\n" +
           "Artist: " + songInfo[0].artists[0].name + "\r\n" +
           "Song: " + songInfo[0].name + "\r\n" +
           "Preview Url: " + songInfo[0].preview_url + "\r\n" +
           "Album the song is from: " + songInfo[0].album.name + "\r\n" +
-          "-----------------------------------------------------------------------------------------------------------------------" + "\r\n";
+          "-------------------------------------------------------------------------------------------------------------------------" + "\r\n";
           console.log(results);
           writeToFile();
     } else {
@@ -92,6 +95,7 @@ function spotifyThisSong() {
 
 
 //************************************************************OMDB**************************************************************//
+//Function to search for a particular movie and display certain properties of that movie, or choose "Mr. Nobody" if no search parameters have been entered.
 function movieThis(){
   if(!searchParameter){
     searchParameter = "Mr. Nobody";
@@ -121,13 +125,12 @@ function movieThis(){
 };
 
 
-//******************************************************NO USER INPUT***********************************************************//
+//******************************************************DO WHAT IT SAYS***********************************************************//
 // Create a function that grabs value from random.txt, format it, and plug it in spotifyThisSong function 
 function doWhatItSays() {
   fs.readFile("random.txt", "utf8", function(error, data){
     if (!error) {
       var output = data.split(",");
-      console.log(output);
       searchParameter = output[1];
       spotifyThisSong();
       writeToFile();
