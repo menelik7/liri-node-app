@@ -1,29 +1,35 @@
-//reads and writes files
+//Require the "fs" node package to be able to read, and write files
 var fs = require("fs"); 
-// Grabs the keys file and store it in a variable
+
+//Require the keys file and store it in a variable
 var keys = require("./keys.js");
+
+//Store all the necessary requirements
 var Twitter = require('twitter');
 var Spotify = require('node-spotify-api');
 var request = require('request');
 
-//Grab the keys and requirements for Spotify
-var spotifyKeysList = keys.spotifyKeys;
-var spotify = new Spotify(spotifyKeysList);
-//Grab the API key and requirements for OMDB
-var omdbKeysList = keys.omdbKeys;
-//Grab the twitter Keys
+//Grab the twitter Key values and set them into their method
 var twitterKeyList = keys.twitterKeys;
 var client = new Twitter(twitterKeyList);
 
-//Store the operand
+//Grab the key values for Spotify and set them into their method
+var spotifyKeysList = keys.spotifyKeys;
+var spotify = new Spotify(spotifyKeysList);
+
+//Grab the API key for OMDB
+var omdbKeysList = keys.omdbKeys;
+
+//Store the third argument (index #2) inputed by the user
 var userInput = process.argv[2];
-//Grab the user input to establish the specific search parameter for Spotify or OMDB (4th argument in terminal window)
+
+//Grab the user input to establish the specific search parameter for Spotify or OMDB (4th argument in terminal window - index #3)
 var searchParameter = process.argv[3];
 
-//Create an empty array to push search results into
+//Create an empty array to push search results into (this will be eventually appended to the log.txt file)
 var results = [];
 
-// This switch-case will determine which function gets run.
+//This switch-case will determine which function gets run based on the user's input (third parameter - index #2).
 switch (userInput) {
   case "my-tweets":
     myTweets();
