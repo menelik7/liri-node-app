@@ -1,35 +1,35 @@
-//Require the "fs" node package to be able to read, and write files
+// Require and store the "fs" node package to be able to read, and write files
 var fs = require("fs"); 
 
-//Require the keys file and store it in a variable
+// Require and store the keys file
 var keys = require("./keys.js");
 
-//Store all the necessary requirements
+// Require and store all the necessary node packages
 var Twitter = require('twitter');
 var Spotify = require('node-spotify-api');
 var request = require('request');
 
-//Grab the twitter Key values and set them into their method
+// Grab the Twitter Key values and set them into their method
 var twitterKeyList = keys.twitterKeys;
 var client = new Twitter(twitterKeyList);
 
-//Grab the key values for Spotify and set them into their method
+// Grab the Spotify key values and set them into their method
 var spotifyKeysList = keys.spotifyKeys;
 var spotify = new Spotify(spotifyKeysList);
 
-//Grab the API key for OMDB
+// Grab the API key for OMDB
 var omdbKeysList = keys.omdbKeys;
 
-//Store the third argument (index #2) inputed by the user
+// Store the third argument (command at index #2) from the user's input
 var userInput = process.argv[2];
 
-//Grab the user input to establish the specific search parameter for Spotify or OMDB (4th argument in terminal window - index #3)
+// Grab the fourth argument to establish the specific search parameter for Spotify or OMDB (4th argument in terminal window - index #3)
 var searchParameter = process.argv[3];
 
-//Create an empty array to push search results into (this will be eventually appended to the log.txt file)
+// Create an empty array to push search results into (this will eventually be appended to the log.txt file)
 var results = [];
 
-//This switch-case will determine which function gets run based on the user's input (third parameter - index #2).
+// This switch-case will determine which function gets run based on the user's input (third parameter - index #2).
 switch (userInput) {
   case "my-tweets":
     myTweets();
@@ -48,9 +48,10 @@ switch (userInput) {
     break;
 }
 
+
 //**********************************************************TWITTER*************************************************************//
-//Function to display first 20 tweets
-function myTweets(){
+// Function to display first 20 tweets from a specific account
+function myTweets() {
   var params = {screen_name: 'MenelikFalc'};
   client.get('statuses/user_timeline', params, function(error, tweets, response) {
     if (!error) {
@@ -66,8 +67,7 @@ function myTweets(){
             "------------------------------------------------" + "\r\n");
       }
       writeToFile();
-    }
-    else {
+    } else {
       console.log(error);
     }
   });
@@ -75,14 +75,14 @@ function myTweets(){
 
 
 //**********************************************************SPOTIFY************************************************************//
-//Function to search for a particular song and display certain properties of that song, or choose "The sign by Ace of Base" if no search parameters have been entered.
+// Function to search for a particular song and display certain properties of that song, or "The sign by Ace of Base" will be the default parameter if no search parameters have been entered.
 function spotifyThisSong() {
-  if(!searchParameter){
+  if(!searchParameter) {
     searchParameter = "The Sign, Ace of Base";
   }
   // params = searchParameter;
   spotify.search({ type: "track", query: searchParameter }, function(err, data) {
-    if(!err){
+    if(!err) {
       var songInfo = data.tracks.items;
           results =
           "-------------------------------------------------------------------------------------------------------------------------" + "\r\n" +
@@ -94,16 +94,17 @@ function spotifyThisSong() {
           console.log(results);
           writeToFile();
     } else {
-      return console.log("Error :"+ err);
+      console.log("Error occurred :"+ err);
+      return; 
     }
   });
 };
 
 
 //************************************************************OMDB**************************************************************//
-//Function to search for a particular movie and display certain properties of that movie, or choose "Mr. Nobody" if no search parameters have been entered.
-function movieThis(){
-  if(!searchParameter){
+//Function to search for a particular movie and display certain properties of that movie, or "Mr. Nobody" will be the default parameter if no search parameters have been entered.
+function movieThis() {
+  if(!searchParameter) {
     searchParameter = "Mr. Nobody";
   }
   // params = searchParameter;
@@ -147,8 +148,8 @@ function doWhatItSays() {
 };
 
 
-//***********************************************WRITE RESULTS TO log.txt******************************************************//
-// This function grabs the "results" value from each search performed, and writes it to our log.txt file 
+//***********************************************APPEND RESULTS TO log.txt******************************************************//
+// This function grabs the "results" value from each search performed, and appends it to our log.txt file 
 function writeToFile() {
   fs.appendFile("log.txt", results + "\r\n", function(err) {
     if (err) {
