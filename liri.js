@@ -10,15 +10,15 @@ var Spotify = require('node-spotify-api');
 var request = require('request');
 
 // Grab the Twitter Key values and set them into their method
-var twitterKeyList = keys.twitterKeys;
-var client = new Twitter(twitterKeyList);
+var myTwitterKeys = keys.twitterKeys;
+var client = new Twitter(myTwitterKeys);
 
 // Grab the Spotify key values and set them into their method
-var spotifyKeysList = keys.spotifyKeys;
-var spotify = new Spotify(spotifyKeysList);
+var mySpotifyKeys = keys.spotifyKeys;
+var spotify = new Spotify(mySpotifyKeys);
 
 // Grab the API key for OMDB
-var omdbKeysList = keys.omdbKeys;
+var myOmdbKey = keys.omdbKeys;
 
 // Store the third argument (command at index #2) from the user's input
 var userInput = process.argv[2];
@@ -66,7 +66,7 @@ function myTweets() {
             "Tweets: " + tweets[i].text + "\r\n" +
             "------------------------------------------------" + "\r\n");
       }
-      writeToFile();
+      appendToFile();
     } else {
       console.log(error);
     }
@@ -92,7 +92,7 @@ function spotifyThisSong() {
           "Album the song is from: " + songInfo[0].album.name + "\r\n" +
           "-------------------------------------------------------------------------------------------------------------------------" + "\r\n";
           console.log(results);
-          writeToFile();
+          appendToFile();
     } else {
       console.log("Error occurred :"+ err);
       return; 
@@ -108,7 +108,7 @@ function movieThis() {
     searchParameter = "Mr. Nobody";
   }
   // params = searchParameter;
-  request("http://www.omdbapi.com/?&tomatoes=true&r=json&apikey="+ omdbKeysList.API_key + "&t=" + searchParameter, function (error, response, body) {
+  request("http://www.omdbapi.com/?&apikey="+ myOmdbKey.API_key + "&t=" + searchParameter + "&tomatoes=true&r=json", function (error, response, body) {
     if (!error && response.statusCode == 200) {
       var movieObject = JSON.parse(body);
       // console.log(movieObject);
@@ -124,7 +124,7 @@ function movieThis() {
       "Actors: " + movieObject.Actors + "\r\n" +
       "-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------" + "\r\n";
       console.log(results);
-      writeToFile();
+      appendToFile();
     } else {
       return console.log("Error :"+ error);
     }
@@ -140,7 +140,7 @@ function doWhatItSays() {
       var output = data.split(",");
       searchParameter = output[1];
       spotifyThisSong();
-      writeToFile();
+      appendToFile();
     } else {
       console.log("Error occurred" + error);
     }
@@ -150,7 +150,7 @@ function doWhatItSays() {
 
 //***********************************************APPEND RESULTS TO log.txt******************************************************//
 // This function grabs the "results" value from each search performed, and appends it to our log.txt file 
-function writeToFile() {
+function appendToFile() {
   fs.appendFile("log.txt", results + "\r\n", function(err) {
     if (err) {
       return console.log(err);
