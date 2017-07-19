@@ -59,12 +59,12 @@ function myTweets() {
       for (var i = 0; i < tweets.length; i++) {
         console.log(
           results[i] = 
-            "------------------------------------------------" + "\r\n" +
+            "----------------------------------------------------------------------------------------------------------------------------------------------" + "\r\n" +
             "tweet #: " + (i+1) + "\r\n" +
             "created by: " + tweets[i].user.name + "\r\n" +
             "created at: " + tweets[i].created_at + "\r\n" +
             "Tweets: " + tweets[i].text + "\r\n" +
-            "------------------------------------------------" + "\r\n");
+            "----------------------------------------------------------------------------------------------------------------------------------------------" + "\r\n");
       }
       appendToFile();
     } else {
@@ -83,13 +83,13 @@ function spotifyThisSong() {
   // params = searchParameter;
   spotify.search({ type: "track", query: searchParameter }, function(err, data) {
     if(!err) {
-      var songInfo = data.tracks.items;
+      var songObject = data.tracks.items[0];
           results =
           "-------------------------------------------------------------------------------------------------------------------------" + "\r\n" +
-          "Artist: " + songInfo[0].artists[0].name + "\r\n" +
-          "Song: " + songInfo[0].name + "\r\n" +
-          "Preview Url: " + songInfo[0].preview_url + "\r\n" +
-          "Album the song is from: " + songInfo[0].album.name + "\r\n" +
+          "Artist: " + songObject.artists[0].name + "\r\n" +
+          "Song: " + songObject.name + "\r\n" +
+          "Preview Url: " + songObject.preview_url + "\r\n" +
+          "Album that the song is from: " + songObject.album.name + "\r\n" +
           "-------------------------------------------------------------------------------------------------------------------------" + "\r\n";
           console.log(results);
           appendToFile();
